@@ -238,3 +238,10 @@ Laraflake is open-sourced software licensed under the [MIT license](LICENSE).
 
 Derived from [caneara/snowflake](https://github.com/caneara/snowflake) which is no longer maintained.
 The actual Snowflake generation is handled by the excellent [godruoyi/php-snowflake](https://github.com/godruoyi/php-snowflake) library.
+
+## Alternatives
+
+- [caneara/snowflake](https://github.com/caneara/snowflake)
+- [kra8/laravel-snowflake](https://github.com/kra8/laravel-snowflake)
+- [dive-be/laravel-snowflake](https://github.com/dive-be/laravel-snowflake)
+- [hafael/laraflake](https://github.com/hafael/laraflake)
