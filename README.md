@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/art/laraflake.webp" alt="Laraflake" style="width:35%;">
+  <img src="/art/laraflake.webp" alt="Laraflake" width="35%">
 </p>
 <p align="center">Generate X/Twitter <a href="https://en.wikipedia.org/wiki/Snowflake_ID">Snowflake identifiers</a> in Laravel.</p>
 <p align="center">
