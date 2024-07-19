@@ -19,7 +19,7 @@
 
 ## What are Snowflakes?
 
-Snowflakes are a form of unique identifier devised by X/Twitter and are used by many companies, including Instagram and Discord, to generate unique IDs for their entities.
+Snowflakes are a form of unique identifier [devised by X/Twitter](https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake) and are used by many companies, including Instagram and Discord, to generate unique IDs for their entities.
 
 Some of the benefits of using Snowflakes (over alternatives such as UUID/ULID) include:
 
