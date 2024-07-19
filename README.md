@@ -1,5 +1,9 @@
 # Laraflake
 
+<p align="center">
+  <img src="/art/laraflake.webp" alt="Laraflake" style="width:40%;">
+</p>
+
 This package enables a Laravel application to create [Snowflake IDs](https://en.wikipedia.org/wiki/Snowflake_ID).
 It is a very thin wrapper around the excellent [godruoyi/php-snowflake](https://github.com/godruoyi/php-snowflake) library.
 
