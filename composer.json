@@ -1,0 +1,98 @@
+{
+  "name": "calebdw/laraflake",
+  "description": "A Laravel package to create X/Twitter Snowflake identifiers.",
+  "keywords": [
+    "snowflake",
+    "twitter",
+    "unique identifier",
+    "unique id",
+    "php",
+    "laravel",
+    "database",
+    "identifier",
+    "timestamp",
+    "distributed",
+    "ids"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Caleb White",
+      "email": "cdwhite3@pm.me"
+    }
+  ],
+  "homepage": "https://github.com/calebdw/laraflake",
+  "autoload": {
+    "psr-4": {
+      "CalebDW\\Laraflake\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CalebDW\\Laraflake\\Tests\\": "tests/",
+      "Workbench\\App\\": "workbench/app/",
+      "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+      "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "godruoyi/php-snowflake": "^3.0",
+    "illuminate/contracts": "^10.0|^11.0",
+    "illuminate/database": "^10.0|^11.0",
+    "illuminate/support": "^10.0|^11.0",
+    "illuminate/validation": "^10.0|^11.0",
+    "phpstan/phpstan": "^1.11"
+  },
+  "require-dev": {
+    "larastan/larastan": "^2.9",
+    "laravel/pint": "^1.16.2",
+    "orchestra/testbench": "^9.0",
+    "pestphp/pest": "^2.34"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CalebDW\\Laraflake\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "scripts": {
+    "test:lint": "pint --test",
+    "test:lint-fix": "pint",
+    "test:static": "phpstan analyze --ansi -v",
+    "test:unit": "pest",
+    "test:coverage": [
+      "@putenv XDEBUG_MODE=coverage",
+      "pest --coverage"
+    ],
+    "test": [
+      "@test:lint",
+      "@test:static",
+      "@test:coverage"
+    ],
+    "post-autoload-dump": [
+      "@clear",
+      "@prepare"
+    ],
+    "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+    "prepare": "@php vendor/bin/testbench package:discover --ansi",
+    "build": "@php vendor/bin/testbench workbench:build --ansi",
+    "serve": [
+      "Composer\\Config::disableProcessTimeout",
+      "@build",
+      "@php vendor/bin/testbench serve"
+    ]
+  },
+  "minimum-stability": "stable"
+}

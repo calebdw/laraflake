@@ -1,0 +1,2 @@
+providers:
+  - CalebDW\Laraflake\ServiceProvider
