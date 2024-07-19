@@ -8,10 +8,14 @@ use CalebDW\Laraflake\Mixins\BlueprintMixin;
 use CalebDW\Laraflake\Mixins\RuleMixin;
 use CalebDW\Laraflake\Mixins\StrMixin;
 use Composer\InstalledVersions;
+use Godruoyi\Snowflake\FileLockResolver;
 use Godruoyi\Snowflake\LaravelSequenceResolver;
+use Godruoyi\Snowflake\PredisSequenceResolver;
 use Godruoyi\Snowflake\RandomSequenceResolver;
+use Godruoyi\Snowflake\RedisSequenceResolver;
 use Godruoyi\Snowflake\SequenceResolver;
 use Godruoyi\Snowflake\Snowflake;
+use Godruoyi\Snowflake\SwooleSequenceResolver;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Console\AboutCommand;
@@ -38,7 +42,8 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->registerMixins();
 
         AboutCommand::add('Laraflake', fn () => [
-            'Version' => InstalledVersions::getPrettyVersion('calebdw/laraflake'),
+            'Sequence Resolver' => $this->getPrettyResolver(),
+            'Version'           => InstalledVersions::getPrettyVersion('calebdw/laraflake'),
         ]);
     }
 
@@ -77,5 +82,22 @@ class ServiceProvider extends IlluminateServiceProvider
 
             return new LaravelSequenceResolver($repository);
         });
+    }
+
+    /** @codeCoverageIgnore */
+    protected function getPrettyResolver(): string
+    {
+        /** @var SequenceResolver $resolver */
+        $resolver = $this->app->make(SequenceResolver::class);
+
+        return match ($resolver::class) {
+            LaravelSequenceResolver::class => 'Laravel Cache',
+            RandomSequenceResolver::class  => 'Random (unsafe)',
+            SwooleSequenceResolver::class  => 'Swoole',
+            RedisSequenceResolver::class   => 'Redis',
+            FileLockResolver::class        => 'File',
+            PredisSequenceResolver::class  => 'Predis',
+            default                        => $resolver::class,
+        };
     }
 }
