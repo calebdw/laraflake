@@ -63,6 +63,9 @@ jobs:
         run: composer dump-autoload --optimize --strict-psr
 
       - name: Execute tests
-        run: |
-          ls -alh workbench/database/migrations
-          composer test
+        run: composer test
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
