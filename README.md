@@ -2,7 +2,20 @@
   <img src="/art/laraflake.webp" alt="Laraflake" style="width:35%;">
 </p>
 <p align="center">Generate X/Twitter <a href="https://en.wikipedia.org/wiki/Snowflake_ID">Snowflake identifiers</a> in Laravel.</p>
-
+<p align="center">
+  <a href="https://github.com/calebdw/laraflake/actions/workflows/tests.yml">
+    <image src="https://github.com/calebdw/laraflake/actions/workflows/tests.yml/badge.svg" alt="Test Results"></image>
+  </a>
+  <!-- <a href="https://codecov.io/gh/calebdw/laraflake"> -->
+  <!--   <img src="https://codecov.io/gh/calebdw/laraflake/branch/master/graph/badge.svg?token=7AAOYCJK97" alt=""/> -->
+  <!-- </a> -->
+  <a href="https://github.com/calebdw/laraflake">
+    <image src="https://img.shields.io/github/license/calebdw/laraflake" alt="License"></image>
+  </a>
+  <a href="https://packagist.org/packages/calebdw/laraflake">
+    <image src="https://img.shields.io/packagist/v/calebdw/laraflake.svg" alt="Packagist Version"></image>
+  </a>
+</p>
 
 ## What are Snowflakes?
 
@@ -155,7 +168,6 @@ class Post extends Model
     ];
 }
 ```
-
 
 ### Validation
 
