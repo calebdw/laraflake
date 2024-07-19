@@ -1,21 +1,26 @@
-<p align="center">
-  <img src="/art/laraflake.webp" alt="Laraflake" width="40%">
-</p>
-<p align="center">Generate X/Twitter <a href="https://en.wikipedia.org/wiki/Snowflake_ID">Snowflake identifiers</a> in Laravel.</p>
-<p align="center">
-  <a href="https://github.com/calebdw/laraflake/actions/workflows/tests.yml">
-    <img src="https://github.com/calebdw/laraflake/actions/workflows/tests.yml/badge.svg" alt="Test Results">
-  </a>
-  <a href="https://codecov.io/github/calebdw/laraflake" >
-    <img src="https://codecov.io/github/calebdw/laraflake/graph/badge.svg?token=RPLQKWDM5G" alt="Code Coverage">
-  </a>
-  <a href="https://github.com/calebdw/laraflake">
-    <img src="https://img.shields.io/github/license/calebdw/laraflake" alt="License">
-  </a>
-  <a href="https://packagist.org/packages/calebdw/laraflake">
-    <img src="https://img.shields.io/packagist/v/calebdw/laraflake.svg" alt="Packagist Version">
-  </a>
-</p>
+<div align="center">
+  <p>
+    <img src="/art/laraflake.webp" alt="Laraflake" width="40%">
+  </p>
+  <p>Generate X/Twitter <a href="https://en.wikipedia.org/wiki/Snowflake_ID">Snowflake identifiers</a> in Laravel.</p>
+  <p>
+    <a href="https://github.com/calebdw/laraflake/actions/workflows/tests.yml">
+      <img src="https://github.com/calebdw/laraflake/actions/workflows/tests.yml/badge.svg" alt="Test Results">
+    </a>
+    <a href="https://codecov.io/github/calebdw/laraflake" >
+      <img src="https://codecov.io/github/calebdw/laraflake/graph/badge.svg?token=RPLQKWDM5G" alt="Code Coverage">
+    </a>
+    <a href="https://github.com/calebdw/laraflake">
+      <img src="https://img.shields.io/github/license/calebdw/laraflake" alt="License">
+    </a>
+    <a href="https://packagist.org/packages/calebdw/laraflake">
+      <img src="https://img.shields.io/packagist/v/calebdw/laraflake.svg" alt="Packagist Version">
+    </a>
+    <a href="https://packagist.org/packages/calebdw/laraflake">
+      <img src="https://img.shields.io/packagist/dt/calebdw/laraflake.svg" alt="Total Downloads">
+    </a>
+  </p>
+</div>
 
 ## What are Snowflakes?
 
