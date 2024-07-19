@@ -19,7 +19,15 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.1, 8.2, 8.3]
-        laravel: [10.*, 11.*]
+        laravel: ['^10.0', '^11.0']
+        include:
+          - laravel: ^10.0
+            testbench: ^8.0
+          - laravel: ^11.0
+            testbench: ^9.0
+        exclude:
+          - php: 8.1
+            laravel: '^11.0'
     name: PHP${{ matrix.php }} - Laravel${{ matrix.laravel }}
     runs-on: ubuntu-latest
     steps:
@@ -49,7 +57,7 @@ jobs:
           restore-keys: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-
 
       - name: Install dependencies from composer.json
-        run: composer update --with='laravel/framework:${{ matrix.laravel }}' --no-interaction --no-progress
+        run: composer update --with='laravel/framework:${{ matrix.laravel }}' --with='orchestra/testbench:${{ matrix.testbench }}' --no-interaction --no-progress
 
       - name: Check PSR-4 mapping
         run: composer dump-autoload --optimize --strict-psr
