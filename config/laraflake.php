@@ -13,7 +13,7 @@ return [
     | you should set this value to the current date when building a new app.
     |
     */
-    'epoch' => env('SNOWFLAKE_EPOCH', '2024-01-01'),
+    'epoch' => env('LARAFLAKE_EPOCH', '2024-01-01'),
 
     /*
     |--------------------------------------------------------------------------
@@ -24,6 +24,6 @@ return [
     | by Snowflake when generating unique identifiers. The values must be 0--31.
     |
     */
-    'datacenter_id' => env('SNOWFLAKE_DATACENTER_ID', 0),
-    'worker_id'     => env('SNOWFLAKE_WORKER_ID', 0),
+    'datacenter_id' => env('LARAFLAKE_DATACENTER_ID', 0),
+    'worker_id'     => env('LARAFLAKE_WORKER_ID', 0),
 ];
