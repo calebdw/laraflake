@@ -63,7 +63,7 @@ use Godruoyi\Snowflake\Snowflake;
 resolve('snowflake')->id();      // (string) "5585066784854016"
 resolve(Snowflake::class)->id(); // (string) "5585066784854016"
 ```
-This package also provides a `snowflake` helper function, a `Snowflake` facade, and a `Str` macro for convenience:
+This package also provides a `snowflake` helper function, a `Snowflake` facade, and a `Str::snowflakeId` macro for convenience:
 
 ```php
 use CalebDW\Laraflake\Facades\Snowflake;
@@ -159,7 +159,7 @@ class Post extends Model
 
 ### Validation
 
-If you need to validate Snowflakes in your application, you can use the `Snowflake` rule or the `Rule` macro provided by this package:
+If you need to validate Snowflakes in your application, you can use the `Snowflake` rule or the `Rule::snowflake` macro provided by this package:
 
 ```php
 use CalebDW\Laraflake\Rules\Snowflake;
