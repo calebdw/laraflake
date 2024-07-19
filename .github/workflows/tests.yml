@@ -63,4 +63,6 @@ jobs:
         run: composer dump-autoload --optimize --strict-psr
 
       - name: Execute tests
-        run: composer test
+        run: |
+          ls -alh workbench/database/migrations
+          composer test
