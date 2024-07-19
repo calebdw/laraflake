@@ -51,7 +51,7 @@
   "require-dev": {
     "larastan/larastan": "^2.9",
     "laravel/pint": "^1.16.2",
-    "orchestra/testbench": "^9.0",
+    "orchestra/testbench": "^8.0|^9.0",
     "pestphp/pest": "^2.34"
   },
   "extra": {
