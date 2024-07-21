@@ -41,10 +41,18 @@ class ServiceProvider extends IlluminateServiceProvider
 
         $this->registerMixins();
 
-        AboutCommand::add('Laraflake', fn () => [
-            'Sequence Resolver' => $this->getPrettyResolver(),
-            'Version'           => InstalledVersions::getPrettyVersion('calebdw/laraflake'),
-        ]);
+        AboutCommand::add('Laraflake', function () {
+            /** @var array{datacenter_id: int, worker_id: int, epoch: string} $config */
+            $config = config('laraflake');
+
+            return [
+                'Epoch'             => $config['epoch'],
+                'Datacenter ID'     => $config['datacenter_id'],
+                'Worker ID'         => $config['worker_id'],
+                'Sequence Resolver' => $this->getPrettyResolver(),
+                'Version'           => InstalledVersions::getPrettyVersion('calebdw/laraflake'),
+            ];
+        });
     }
 
     /** Register custom mixins. */

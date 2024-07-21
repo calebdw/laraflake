@@ -188,7 +188,7 @@ $request->validate([
 ]);
 ```
 
-You can also just use the `Str` macro to check if a value is a valid Snowflake:
+You can also just use the `Str::isSnowflake` macro to check if a value is a valid Snowflake:
 
 ```php
 use Illuminate\Support\Str;
@@ -203,7 +203,6 @@ to ensure that numbers generated on the same machine within the same millisecond
 
 By default, if the application has a cache, then it uses the `LaravelSequenceResolver`
 which uses the Laravel cache to store the last sequence number.
-
 If the application does not have a cache, then it uses the `RandomSequenceResolver` which
 has no dependencies **but is not concurrency-safe**.
 
