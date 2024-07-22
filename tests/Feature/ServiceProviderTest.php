@@ -22,3 +22,9 @@ it('binds laravel sequence resolver when there is a cache', function () {
     expect(app()->make(SequenceResolver::class))
         ->toBeInstanceOf(LaravelSequenceResolver::class);
 });
+
+it('registers the AboutCommand entry', function () {
+    test()->artisan('about')
+        ->assertSuccessful()
+        ->expectsOutputToContain('Laraflake');
+});
