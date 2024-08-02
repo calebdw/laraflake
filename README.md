@@ -54,10 +54,22 @@ php artisan vendor:publish --provider="CalebDW\Laraflake\ServiceProvider"
 
 ## Configuration
 
-### Snowflake Epoch
+### Snowflake Type
 
-The 41-bit timestamp encoded in the Snowflake is the difference between the time of creation and a given starting epoch/timestamp.
-Snowflakes can be generated for up to 69 years past the given epoch.
+The Snowflake type determines the class used to generate Snowflakes.
+
+The default Snowflake type is `Godruoyi\Snowflake\Snowflake` which uses 41 bits for the epoch, 5 bits for the data center ID, 5 bits for the worker ID, and 12 bits for the sequence.
+This allows for up to `1024` workers and `4096` unique IDs per worker per millisecond.
+
+You can change the Snowflake type to `Godruoyi\Snowflake\Sonyflake` which uses 39 bits for the epoch, 16 bits for the machine ID, and 8 bits for the sequence.
+This allows for up to `65535` machines and `256` unique IDs per worker per *10 milliseconds*.
+
+### Epoch
+
+The timestamp encoded in the Snowflake is the difference between the time of creation and a given starting epoch/timestamp.
+Snowflakes use 41 bits and can generate IDs for up to 69 years past the given epoch.
+Sonyflakes use 39 bits and can generate IDs for up to 174 years past the given epoch.
+
 In most cases you should set this value to the current date using a format of `YYYY-MM-DD`.
 
 > **Note**:
@@ -66,8 +78,17 @@ as that may reduce the number of years for which you can generate timestamps.
 
 ### Data Center & Worker IDs
 
-If using distributed systems, you'll need to set the data center and worker IDs that the application should use when generating Snowflakes.
+> **Note**: This is only used for the `Snowflake` type.
+
+You can set the data center and worker IDs that the application should use when generating Snowflakes.
 These are used to ensure that each worker generates unique Snowflakes and can range from `0` to `31` (up to `1024` unique workers).
+
+### Machine ID
+
+> **Note**: This is only used for the `Sonyflake` type.
+
+You can set the machine ID that the application should use when generating Sonyflakes.
+This is used to ensure that each machine generates unique Sonyflakes and can range from `0` to `65535`.
 
 ## Usage
 
@@ -81,6 +102,7 @@ use Godruoyi\Snowflake\Snowflake;
 resolve('snowflake')->id();      // (string) "5585066784854016"
 resolve(Snowflake::class)->id(); // (string) "5585066784854016"
 ```
+
 This package also provides a `snowflake` helper function, a `Snowflake` facade, and a `Str::snowflakeId` macro for convenience:
 
 ```php
@@ -130,6 +152,7 @@ class Post extends Model
 ```
 
 The trait provides several features for the model's Snowflake columns:
+
 - the generation of Snowflakes for new records
 - route model binding
 - automatic casting from database integers to strings which prevents truncation in languages that do not support 64-bit integers (such as JavaScript).
