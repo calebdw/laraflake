@@ -2,7 +2,19 @@
 
 declare(strict_types=1);
 
+use Godruoyi\Snowflake\Snowflake;
+
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Snowflake Type
+    |--------------------------------------------------------------------------
+    |
+    | The class to use by Laraflake when generating unique identifiers.
+    | The default is the Snowflake class, but you can also use the Sonyflake class.
+    */
+    'snowflake_type' => Snowflake::class,
+
     /*
     |--------------------------------------------------------------------------
     | Snowflake Epoch
@@ -17,7 +29,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Data Center & Worker IDs
+    | Snowflake Data Center & Worker IDs
     |--------------------------------------------------------------------------
     |
     | These values represents the data center and worker ids that should be used
@@ -26,4 +38,15 @@ return [
     */
     'datacenter_id' => env('LARAFLAKE_DATACENTER_ID', 0),
     'worker_id'     => env('LARAFLAKE_WORKER_ID', 0),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sonyflake Machine ID
+    |--------------------------------------------------------------------------
+    |
+    | This value represents the machine id that should be used by Sonyflake when
+    | generating unique identifiers. The value must be 0--65535 (2^16 - 1).
+    |
+    */
+    'machine_id' => env('LARAFLAKE_MACHINE_ID', 0),
 ];
