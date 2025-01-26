@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace CalebDW\Laraflake;
 
-use CalebDW\Laraflake\Mixins\BlueprintMixin;
-use CalebDW\Laraflake\Mixins\RuleMixin;
-use CalebDW\Laraflake\Mixins\StrMixin;
+use CalebDW\Laraflake\Macros\BlueprintMacros;
+use CalebDW\Laraflake\Macros\RuleMacros;
+use CalebDW\Laraflake\Macros\StrMacros;
 use Composer\InstalledVersions;
 use Godruoyi\Snowflake\FileLockResolver;
 use Godruoyi\Snowflake\LaravelSequenceResolver;
@@ -18,11 +18,9 @@ use Godruoyi\Snowflake\Snowflake;
 use Godruoyi\Snowflake\Sonyflake;
 use Godruoyi\Snowflake\SwooleSequenceResolver;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use InvalidArgumentException;
 
 /**
@@ -50,7 +48,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes([__DIR__ . '/../config/laraflake.php' => config_path('laraflake.php')]);
 
-        $this->registerMixins();
+        $this->registerMacros();
 
         AboutCommand::add('Laraflake', function () {
             /** @var LaraflakeConfig $config */
@@ -76,17 +74,17 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /** Register custom mixins. */
-    protected function registerMixins(): void
+    protected function registerMacros(): void
     {
-        Blueprint::mixin(new BlueprintMixin());
-        Str::mixin(new StrMixin());
-        Rule::mixin(new RuleMixin());
+        BlueprintMacros::boot();
+        RuleMacros::boot();
+        StrMacros::boot();
     }
 
     /** Register the Snowflake singleton. */
     protected function registerSnowflake(): void
     {
-        $this->app->singleton(Snowflake::class, function ($app) {
+        $this->app->singleton(Snowflake::class, function (Application $app) {
             /** @var LaraflakeConfig $config */
             $config = config('laraflake');
 
@@ -103,7 +101,7 @@ class ServiceProvider extends IlluminateServiceProvider
     /** Bind the Snowflake sequence resolver. */
     protected function registerSequenceResolver(): void
     {
-        $this->app->bind(SequenceResolver::class, function ($app) {
+        $this->app->bind(SequenceResolver::class, function (Application $app) {
             if (! $app->has('cache.store')) {
                 return new RandomSequenceResolver();
             }

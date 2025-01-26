@@ -40,10 +40,14 @@ trait HasSnowflakes
     /** @inheritDoc */
     public function resolveRouteBindingQuery($query, $value, $field = null)
     {
+        if (! is_numeric($value)) {
+            return parent::resolveRouteBindingQuery($query, $value, $field);
+        }
+
         $field ??= $this->getRouteKeyName();
 
         if (in_array($field, $this->uniqueIds(), true) && ! Str::isSnowflake($value)) {
-            throw (new ModelNotFoundException())->setModel($this::class, $value);
+            throw new ModelNotFoundException()->setModel($this::class, (string) $value);
         }
 
         return parent::resolveRouteBindingQuery($query, $value, $field);

@@ -52,11 +52,14 @@ it('binds route model', function () {
         ->assertSee(test()->post->title);
 });
 
-it('throws exception for invalid snowflake', function () {
+it('throws exception for invalid snowflake', function ($value) {
     test()->withoutExceptionHandling();
 
-    test()->get('/users-id/invalid');
-})->throws(ModelNotFoundException::class);
+    test()->get("/users-id/{$value}");
+})->with([
+    'non-numeric',
+    '9999999999999999999',
+])->throws(ModelNotFoundException::class);
 
 it('throws exception for non-unique field', function () {
     test()->withoutExceptionHandling();

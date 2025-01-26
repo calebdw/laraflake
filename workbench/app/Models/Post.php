@@ -25,6 +25,7 @@ class Post extends Model
         return ['slug'];
     }
 
+    /** @return BelongsTo<User, $this> */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

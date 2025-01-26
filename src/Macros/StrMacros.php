@@ -2,25 +2,18 @@
 
 declare(strict_types=1);
 
-namespace CalebDW\Laraflake\Mixins;
+namespace CalebDW\Laraflake\Macros;
 
 use CalebDW\Laraflake\Facades\Snowflake;
-use Closure;
 use Illuminate\Support\Str;
 
-/** @mixin \Illuminate\Support\Str */
-class StrMixin
+class StrMacros
 {
-    /** @return Closure(): string */
-    public function snowflake(): Closure
+    public static function boot(): void
     {
-        return fn (): string => Snowflake::id();
-    }
+        Str::macro('snowflake', fn (): string => Snowflake::id());
 
-    /** @return Closure(mixed): bool */
-    public function isSnowflake(): Closure
-    {
-        return function (mixed $value): bool {
+        Str::macro('isSnowflake', function (mixed $value): bool {
             if (! is_numeric($value)) {
                 return false;
             }
@@ -28,11 +21,13 @@ class StrMixin
             $value = Str::of((string) $value)
                 ->rtrim('.0')
                 ->rtrim('.')
-                ->toString();
+                ->value();
 
             if (Str::contains($value, '.')) {
                 return false;
             }
+
+            assert(is_numeric($value));
 
             $maxSnowflakeValue = '9223372036854775807';
 
@@ -43,6 +38,6 @@ class StrMixin
             $parsed = Snowflake::parseId($value);
 
             return count(array_filter($parsed)) === count($parsed);
-        };
+        });
     }
 }
