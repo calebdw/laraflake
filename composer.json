@@ -48,7 +48,7 @@
     "illuminate/validation": "^11.0 || ^12.0"
   },
   "require-dev": {
-    "larastan/larastan": "^3.0",
+    "calebdw/larastan": "^3.0",
     "laravel/pint": "^1.16.2",
     "orchestra/testbench": "^9.0 || ^10.0",
     "pestphp/pest": "^2.34"

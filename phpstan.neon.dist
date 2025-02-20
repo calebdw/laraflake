@@ -1,5 +1,5 @@
 includes:
-  - vendor/larastan/larastan/extension.neon
+  - vendor/calebdw/larastan/extension.neon
 parameters:
   level: max
   paths:
