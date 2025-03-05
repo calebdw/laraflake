@@ -8,6 +8,7 @@ use CalebDW\Laraflake\Casts\AsSnowflake;
 use CalebDW\Laraflake\Concerns\HasSnowflakes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model
 {
@@ -34,5 +35,11 @@ class Post extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /** @return MorphMany<Tag, $this> */
+    public function tags(): MorphMany
+    {
+        return $this->morphMany(Tag::class, 'taggable');
     }
 }
