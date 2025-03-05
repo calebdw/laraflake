@@ -22,32 +22,31 @@ Please review these guidelines before submitting any pull requests.
 Clone your fork, then install the dependencies:
 
 ```bash
-    composer update
+composer install
 ```
 
 ## Tests
 
 Run all tests:
 
-
 ```bash
-    composer test
+composer test
 ```
 
 Linting:
 
 ```bash
-    composer test:lint
+composer test:lint
 ```
 
 Static analysis:
 
 ```bash
-    composer test:static
+composer test:static
 ```
 
 PHPUnit tests:
 
 ```bash
-    composer test:coverage
+composer test:coverage
 ```
