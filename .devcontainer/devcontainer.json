@@ -1,0 +1,20 @@
+{
+  "name": "PHP 8.4 Laravel Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "laravel.vscode-laravel"
+      ],
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "postCreateCommand": "composer install",
+  "remoteUser": "vscode"
+}
