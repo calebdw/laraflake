@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Adapters;
-
 use CalebDW\Laraflake\Adapters\GodruoyiSnowflakeAdapter;
 use CalebDW\Laraflake\Adapters\GodruoyiSonyflakeAdapter;
 use CalebDW\Laraflake\Contracts\SnowflakeGeneratorInterface;
