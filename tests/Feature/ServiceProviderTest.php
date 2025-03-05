@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use CalebDW\Laraflake\Adapters\GodruoyiSnowflakeAdapter;
+use CalebDW\Laraflake\Adapters\GodruoyiSonyflakeAdapter;
+use CalebDW\Laraflake\Contracts\SnowflakeGeneratorInterface;
 use Godruoyi\Snowflake\LaravelSequenceResolver;
 use Godruoyi\Snowflake\RandomSequenceResolver;
 use Godruoyi\Snowflake\SequenceResolver;
@@ -31,11 +34,22 @@ it('registers the AboutCommand entry', function () {
         ->expectsOutputToContain('Laraflake');
 });
 
+it('supports Snowflakes', function () {
+    config()->set('laraflake.snowflake_type', Snowflake::class);
+
+    expect(app()->make(SnowflakeGeneratorInterface::class))
+        ->toBeInstanceOf(GodruoyiSnowflakeAdapter::class);
+
+    test()->artisan('about')
+        ->assertSuccessful()
+        ->expectsOutputToContain('Snowflake');
+});
+
 it('supports Sonyflakes', function () {
     config()->set('laraflake.snowflake_type', Sonyflake::class);
 
-    expect(app()->make(Snowflake::class))
-        ->toBeInstanceOf(Sonyflake::class);
+    expect(app()->make(SnowflakeGeneratorInterface::class))
+        ->toBeInstanceOf(GodruoyiSonyflakeAdapter::class);
 
     test()->artisan('about')
         ->assertSuccessful()
@@ -49,6 +63,6 @@ it('throws exception for invalid snowflake type', function () {
         ->assertSuccessful()
         ->doesntExpectOutputToContain('Sonyflake');
 
-    expect(app()->make(Snowflake::class))
-        ->toBeInstanceOf(Sonyflake::class);
+    expect(app()->make(SnowflakeGeneratorInterface::class))
+        ->toBeInstanceOf(GodruoyiSonyflakeAdapter::class);
 })->throws(InvalidArgumentException::class);
