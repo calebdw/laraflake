@@ -16,18 +16,10 @@ return new class extends Migration
             $table->snowflakeMorphs('taggable');
             $table->timestamps();
         });
-
-        Schema::create('nullable_tags', function (Blueprint $table) {
-            $table->snowflake()->primary();
-            $table->string('name');
-            $table->nullableSnowflakeMorphs('taggable');
-            $table->timestamps();
-        });
     }
 
     public function down(): void
     {
         Schema::dropIfExists('tags');
-        Schema::dropIfExists('nullable_tags');
     }
 };
