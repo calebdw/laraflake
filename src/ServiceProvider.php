@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace CalebDW\Laraflake;
 
+use CalebDW\Laraflake\Adapters\GodruoyiSnowflakeAdapter;
+use CalebDW\Laraflake\Adapters\GodruoyiSonyflakeAdapter;
+use CalebDW\Laraflake\Contracts\SnowflakeGeneratorInterface;
 use CalebDW\Laraflake\Macros\BlueprintMacros;
 use CalebDW\Laraflake\Macros\RuleMacros;
 use CalebDW\Laraflake\Macros\StrMacros;
@@ -84,18 +87,19 @@ class ServiceProvider extends IlluminateServiceProvider
     /** Register the Snowflake singleton. */
     protected function registerSnowflake(): void
     {
-        $this->app->singleton(Snowflake::class, function (Application $app) {
+        $this->app->singleton(SnowflakeGeneratorInterface::class, function (Application $app) {
             /** @var LaraflakeConfig $config */
             $config = config('laraflake');
 
             return (match ($config['snowflake_type']) {
-                Snowflake::class => new Snowflake($config['datacenter_id'], $config['worker_id']),
-                Sonyflake::class => new Sonyflake($config['machine_id']),
+                Snowflake::class => new GodruoyiSnowflakeAdapter($config['datacenter_id'], $config['worker_id']),
+                Sonyflake::class => new GodruoyiSonyflakeAdapter($config['machine_id']),
                 default          => throw new InvalidArgumentException("Invalid Snowflake type: {$config['snowflake_type']}"),
             })->setStartTimeStamp(strtotime($config['epoch']) * 1000)
                 ->setSequenceResolver($app->make(SequenceResolver::class));
         });
-        $this->app->alias(Snowflake::class, 'laraflake');
+
+        $this->app->alias(SnowflakeGeneratorInterface::class, 'laraflake');
     }
 
     /** Bind the Snowflake sequence resolver. */
