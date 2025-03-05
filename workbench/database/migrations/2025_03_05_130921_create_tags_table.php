@@ -13,14 +13,14 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->snowflake()->primary();
             $table->string('name');
-            $table->morphsSnowflake('taggable');
+            $table->snowflakeMorphs('taggable');
             $table->timestamps();
         });
 
         Schema::create('nullable_tags', function (Blueprint $table) {
             $table->snowflake()->primary();
             $table->string('name');
-            $table->nullableMorphsSnowflake('taggable');
+            $table->nullableSnowflakeMorphs('taggable');
             $table->timestamps();
         });
     }

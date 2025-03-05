@@ -16,7 +16,7 @@ beforeEach(function () {
     ]);
 });
 
-it('creates tags table with morphsSnowflake columns', function () {
+it('creates tags table with snowflakeMorphs columns', function () {
     expect(Schema::hasColumn('tags', 'taggable_id'))->toBeTrue();
     expect(Schema::hasColumn('tags', 'taggable_type'))->toBeTrue();
 
@@ -40,7 +40,7 @@ it('creates tags table with morphsSnowflake columns', function () {
     expect($tags->first()->name)->toBe('Post Tag');
 });
 
-it('creates nullable_tags table with nullableMorphsSnowflake columns', function () {
+it('creates nullable_tags table with nullableSnowflakeMorphs columns', function () {
     expect(Schema::hasColumn('nullable_tags', 'taggable_id'))->toBeTrue();
     expect(Schema::hasColumn('nullable_tags', 'taggable_type'))->toBeTrue();
 

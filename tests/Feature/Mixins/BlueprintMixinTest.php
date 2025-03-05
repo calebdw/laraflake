@@ -48,7 +48,7 @@ it('adds foreign snowflake for a model', function () {
 });
 
 it('adds morph snowflake columns', function () {
-    test()->blueprint->morphsSnowflake('taggable');
+    test()->blueprint->snowflakeMorphs('taggable');
 
     expect((test()->sql)())->toBe([
         'alter table "snowflake" add column "taggable_id" integer not null',
@@ -58,7 +58,7 @@ it('adds morph snowflake columns', function () {
 });
 
 it('adds nullable morph snowflake columns', function () {
-    test()->blueprint->nullableMorphsSnowflake('taggable');
+    test()->blueprint->nullableSnowflakeMorphs('taggable');
 
     expect((test()->sql)())->toBe([
         'alter table "snowflake" add column "taggable_id" integer',

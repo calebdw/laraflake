@@ -25,7 +25,7 @@ class BlueprintMacros
             return $this->foreignSnowflake($column ?? (new $model())->getForeignKey());
         });
 
-        Blueprint::macro('morphsSnowflake', function (string $name, ?string $indexName = null): void {
+        Blueprint::macro('snowflakeMorphs', function (string $name, ?string $indexName = null): void {
             $this->snowflake("{$name}_id");
             $this->text("{$name}_type");
 
@@ -35,7 +35,7 @@ class BlueprintMacros
             );
         });
 
-        Blueprint::macro('nullableMorphsSnowflake', function (string $name, ?string $indexName = null): void {
+        Blueprint::macro('nullableSnowflakeMorphs', function (string $name, ?string $indexName = null): void {
             $this->snowflake("{$name}_id")->nullable();
             $this->text("{$name}_type")->nullable();
 
