@@ -17,8 +17,8 @@ beforeEach(function () {
 });
 
 it('creates tags table with snowflakeMorphs columns', function () {
-    expect(Schema::hasColumn('tags', 'taggable_id'))->toBeTrue();
-    expect(Schema::hasColumn('tags', 'taggable_type'))->toBeTrue();
+    expect(Schema::hasColumn('tags', 'taggable_id'))->toBeTrue()
+        ->and(Schema::hasColumn('tags', 'taggable_type'))->toBeTrue();
 
     $columns = DB::getSchemaBuilder()->getColumnListing('tags');
 
@@ -28,21 +28,21 @@ it('creates tags table with snowflakeMorphs columns', function () {
     $postTag = new Tag(['name' => 'Post Tag']);
     test()->post->tags()->save($postTag);
 
-    expect($userTag->refresh()->taggable)->toBeInstanceOf(User::class);
-    expect($postTag->refresh()->taggable)->toBeInstanceOf(Post::class);
+    expect($userTag->refresh()->taggable)->toBeInstanceOf(User::class)
+        ->and($postTag->refresh()->taggable)->toBeInstanceOf(Post::class);
 
-    $tags = test()->user->tags;
-    expect($tags)->toHaveCount(1);
-    expect($tags->first()->name)->toBe('User Tag');
+    expect(test()->user->tags)
+        ->toHaveCount(1)
+        ->first()->name->toBe('User Tag');
 
-    $tags = test()->post->tags;
-    expect($tags)->toHaveCount(1);
-    expect($tags->first()->name)->toBe('Post Tag');
+    expect(test()->post->tags)
+        ->toHaveCount(1)
+        ->first()->name->toBe('Post Tag');
 });
 
 it('creates nullable_tags table with nullableSnowflakeMorphs columns', function () {
-    expect(Schema::hasColumn('nullable_tags', 'taggable_id'))->toBeTrue();
-    expect(Schema::hasColumn('nullable_tags', 'taggable_type'))->toBeTrue();
+    expect(Schema::hasColumn('nullable_tags', 'taggable_id'))->toBeTrue()
+        ->and(Schema::hasColumn('nullable_tags', 'taggable_type'))->toBeTrue();
 
     DB::table('nullable_tags')->insert([
         'id'            => snowflake()->id(),
@@ -54,7 +54,8 @@ it('creates nullable_tags table with nullableSnowflakeMorphs columns', function 
     ]);
 
     $nullTag = DB::table('nullable_tags')->where('name', 'Null Tag')->first();
-    expect($nullTag)->not->toBeNull();
-    expect($nullTag->taggable_id)->toBeNull();
-    expect($nullTag->taggable_type)->toBeNull();
+    expect($nullTag)
+        ->not->toBeNull()
+        ->and($nullTag->taggable_id)->toBeNull()
+        ->and($nullTag->taggable_type)->toBeNull();
 });
