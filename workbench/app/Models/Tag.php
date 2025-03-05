@@ -14,11 +14,7 @@ class Tag extends Model
 
     protected $guarded = [];
 
-    /**
-     * Get the taggable model that the tag belongs to.
-     *
-     * @return MorphTo<Model, $this>
-     */
+    /** @return MorphTo<Model, $this> */
     public function taggable(): MorphTo
     {
         return $this->morphTo();
