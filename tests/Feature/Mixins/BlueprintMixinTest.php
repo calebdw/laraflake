@@ -53,7 +53,7 @@ it('adds morph snowflake columns', function () {
     expect((test()->sql)())->toBe([
         'alter table "snowflake" add column "taggable_id" integer not null',
         'alter table "snowflake" add column "taggable_type" text not null',
-        'create index "snowflake_taggable_id_taggable_type_index" on "snowflake" ("taggable_id", "taggable_type")',
+        'create index "snowflake_taggable_type_taggable_id_index" on "snowflake" ("taggable_type", "taggable_id")',
     ]);
 });
 
@@ -63,6 +63,6 @@ it('adds nullable morph snowflake columns', function () {
     expect((test()->sql)())->toBe([
         'alter table "snowflake" add column "taggable_id" integer',
         'alter table "snowflake" add column "taggable_type" text',
-        'create index "snowflake_taggable_id_taggable_type_index" on "snowflake" ("taggable_id", "taggable_type")',
+        'create index "snowflake_taggable_type_taggable_id_index" on "snowflake" ("taggable_type", "taggable_id")',
     ]);
 });
