@@ -46,3 +46,23 @@ it('adds foreign snowflake for a model', function () {
         'alter table "snowflake" add column "user_id" integer not null',
     ]);
 });
+
+it('adds morph snowflake columns', function () {
+    test()->blueprint->snowflakeMorphs('taggable');
+
+    expect((test()->sql)())->toBe([
+        'alter table "snowflake" add column "taggable_id" integer not null',
+        'alter table "snowflake" add column "taggable_type" text not null',
+        'create index "snowflake_taggable_type_taggable_id_index" on "snowflake" ("taggable_type", "taggable_id")',
+    ]);
+});
+
+it('adds nullable morph snowflake columns', function () {
+    test()->blueprint->nullableSnowflakeMorphs('taggable');
+
+    expect((test()->sql)())->toBe([
+        'alter table "snowflake" add column "taggable_id" integer',
+        'alter table "snowflake" add column "taggable_type" text',
+        'create index "snowflake_taggable_type_taggable_id_index" on "snowflake" ("taggable_type", "taggable_id")',
+    ]);
+});
