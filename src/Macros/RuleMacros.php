@@ -11,6 +11,7 @@ class RuleMacros
 {
     public static function boot(): void
     {
-        Rule::macro('snowflake', fn () => new SnowflakeRule());
+        /** @phpstan-ignore argument.staticClosure (only accessed statically) */
+        Rule::macro('snowflake', static fn () => new SnowflakeRule());
     }
 }

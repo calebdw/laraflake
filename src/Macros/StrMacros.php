@@ -11,9 +11,11 @@ class StrMacros
 {
     public static function boot(): void
     {
-        Str::macro('snowflake', fn (): string => Snowflake::id());
+        /** @phpstan-ignore argument.staticClosure (only accessed statically) */
+        Str::macro('snowflake', static fn (): string => Snowflake::id());
 
-        Str::macro('isSnowflake', function (mixed $value): bool {
+        /** @phpstan-ignore argument.staticClosure (only accessed statically) */
+        Str::macro('isSnowflake', static function (mixed $value): bool {
             if (! is_numeric($value)) {
                 return false;
             }
